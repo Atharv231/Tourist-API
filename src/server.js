@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { apiKey } = require('../config/apikey');
+const { apikey } = require('../config/apikey');
 
 const app = express();
 app.use(cors());
@@ -12,7 +12,7 @@ const PORT = 5000;
 function checkApiKey(req, res, next) {
   const { api_key } = req.query;
 
-  if (api_key !== apiKey) {
+  if (api_key !== apikey) {
     return res.status(403).json({ error: 'Forbidden, invalid API key.' });
   }
 
