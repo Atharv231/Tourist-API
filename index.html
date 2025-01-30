@@ -27,7 +27,7 @@
     </div>
 
 
-<<<<<<< HEAD
+
     <div class="bth">
         <button class="btn1" onclick="redirectToPage()">Start Exploring</button>
     </div>
@@ -36,44 +36,9 @@
 <script>
     function redirectToPage() {
         window.location.href = "main.html";
-=======
-  <script>
-    function searchUser() {
-      const name = document.getElementById('nameInput').value.trim();
-      const responseDiv = document.getElementById('response');
-      const userCard = document.getElementById('userCard');
-      const userImage = document.getElementById('userImage');
-      const userName = document.getElementById('userName');
-      const userAge = document.getElementById('userAge');
+  
+  
 
-      // Hide previous response and card
-      responseDiv.style.display = 'none';
-      userCard.style.display = 'none';
-
-      if (!name) {
-        alert('Please provide a name.');
-        return;
-      }
-
-      fetch(`https://try-api-1.onrender.com/api/udata?api_key=abcdef&name=${name}`)
-        .then(response => response.json())
-        .then(data => {
-          if (data.data) {
-            // Display the user card
-            userCard.style.display = 'block';
-            userImage.src = data.data.imageUrl;
-            userName.textContent = data.data.name;
-            userAge.textContent = `${data.data.info}`;
-          } else {
-            responseDiv.style.display = 'block';
-            responseDiv.textContent = data.message;
-          }
-        })
-        .catch(error => {
-          responseDiv.style.display = 'block';
-          responseDiv.textContent = `Error: ${error}`;
-        });
->>>>>>> 592e91a23c185065fa4d9e9c83dc0d032983dcb3
     }
 </script>
       
