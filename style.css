@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
+@font-face {
+    font-family:'KOMIKAX_';
+    src: url('fonts/KOMIKAX_.ttf') format('truetype');
+}
+body{
+
+    width: 100%;
+    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image:url('./bgmain.jpg');
+}
+main{
+
+    display: flex;
+    
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 8%;
+}
+h4{
+
+   
+    font-weight:800;
+    font-size: 25px;
+    line-height: 30px;
+}
+.info{
+
+
+    cursor: default;
+    width: 40%;
+    backdrop-filter: blur(25px);
+
+    padding: 40px;
+    border-radius: 30px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    transition: 0.2s;
+
+}
+
+.head{
+    font-family: 'Poppins';
+}
+.in{
+    font-size: 19px;
+    margin-top: 5%;
+    font-family: 'Poppins';
+    text-align: center;
+    line-height: 25px;
+}
+.hed{
+    backdrop-filter: blur(25px);
+    cursor: default;
+    font-family:'KOMIKAX_' ;
+}
+
+.btn1{
+    all: unset;
+    
+    margin-top: 18%;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Poppins';
+    font-size: 20px;
+    font-weight: 800;
+    width: 190px;
+    color: aliceblue;
+    background-color: rgb(0, 21, 56);
+    border-radius: 10px;
+    border: 10px solod rgb(0, 0, 0);
+    transition: 0.3s;
+}
+
+.btn1:hover{
+
+    padding: 12px;
+}
