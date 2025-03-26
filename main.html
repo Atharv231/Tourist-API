@@ -249,7 +249,7 @@
                 return;
             }
 
-            fetch(`http://localhost:4000/api/udata?apikey=abcdef&name=${name}`)
+            fetch(`https://try-api-1.onrender.com/api/udata?api_key=abcdef&name=${name}`)
                 .then(response => response.json())
                 .then(data => {
                     loader.style.display = "none";
