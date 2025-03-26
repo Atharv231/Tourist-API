@@ -1,204 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Data Display</title>
-    <script
-      src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
-      type="module"
-    ></script>
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
     <style>
-      body {
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        font-family: Arial, sans-serif;
-        background-image: url("./bgmain.jpg");
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start; /* Keep the content at the top */
-        align-items: center; /* Horizontally center content */
-        height: 100vh;
-        margin: 0;
-      }
+        /* Global Styles */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-image: url("./bgmain.jpg");
+            background-size: cover;
+            background-position: center;
+            color: #333;
+        }
 
-      .container {
-        width: 100%;
-        margin-top: 20px;
-        max-width: 600px;
-        padding: 20px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            text-align: center;
+        }
 
-      .search-box {
-        display: flex;
-        justify-content: space-between;
-       
-      }
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
 
-      .search-box input {
-        padding: 10px;
-        font-size: 16px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        width: 75%;
-      }
+        .search-box input {
+            flex: 1;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            outline: none;
+        }
 
-      .search-box button {
-        padding: 10px 20px;
-        background-color: #4caf50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      }
+        .search-box button {
+            padding: 12px 18px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
 
-      .search-box button:hover {
-        background-color: #45a049;
-      }
+        .search-box button:hover {
+            background: #0056b3;
+        }
 
-      .card {
-        margin-top: 10px;
-        width: 40%;
-        height: 70%;
-        padding: 10px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        text-align: center;
-      }
+        .card {
+            display: none;
+            width: 70%;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-top: 15px;
+            transition: transform 0.3s ease-in-out;
+        }
 
-      .card img {
-        width: 70%;
-        height: 50%;
-        border-radius: 8px;
-      }
+        .transport-box {
+            background: #f0f8ff;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 12px;
+            border-left: 5px solid #007bff;
+        }
 
-      .card h2 {
-        font-size: 24px;
-        margin-top: 15px;
-      }
+        .card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #007bff;
+            margin-bottom: 10px;
+        }
 
-      .card p {
-        font-size: 18px;
-        color: #555;
-      }
+        .card h2 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
 
-      .card .age {
-        font-weight: bold;
-        font-size: 15px;
-      }
+        .card p {
+            font-size: 16px;
+            color: #555;
+        }
 
-      .error {
-        color: red;
-        font-size: 18px;
-        text-align: center;
-      }
+        .card button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s ease;
+        }
 
-      #loader {
-        display: none;
-        margin-top: 10px;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        margin-top: 20%;
-        border: 4px solid #4b4c4c; /* Green border */
-        border-radius: 50%; /* Circular border */
-      
-      }
+        .card button:hover {
+            background: #218838;
+        }
 
-      
+        .error {
+            color: rgb(0, 0, 0);
+            font-size: 26px;
+            text-align: center;
+            font-weight: bolder;
+            margin-top: 10px;
+            border-radius: 10px;
+            
+        }
+
+        /* Loader */
+        #loader {
+            display: none;
+            margin-top: 15px;
+        }
+
+        /* History Section */
+        #historyContainer {
+            width: 100%;
+            max-width: 600px;
+            margin-top: 20px;
+        }
+
+        .history-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .history-card:hover {
+            transform: scale(1.02);
+        }
+
+        .history-card img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+            border: 2px solid #007bff;
+        }
+
+        .history-card h3 {
+            font-size: 18px;
+            flex: 1;
+        }
+
+        .history-card button {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .history-card button:hover {
+            background: #c82333;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .search-box {
+                flex-direction: column;
+            }
+            .search-box input {
+                width: 100%;
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
+
     <div class="container">
-      <div class="search-box">
-        <input
-          type="text"
-          id="nameInput"
-          placeholder="Enter name to search..."
-        />
-        <button onclick="searchUser()">Search</button>
-      </div>
+        <div class="search-box">
+            <input type="text" id="nameInput" placeholder="Enter name to search...">
+            <button onclick="searchUser()">Search</button>
+        </div>
     </div>
+
     <div id="response" class="error"></div>
-    <div id="userCard" class="card" style="display: none">
-      <img id="userImage" src="" alt="User Image" />
-      <h2 id="userName"></h2>
-      <p class="age" id="userAge"></p>
+
+    <div id="userCard" class="card">
+        <img id="userImage" src="" alt="User Image">
+        <h2 id="userName"></h2>
+        <p id="userAge"></p>
+        <p class="transport-box" id="cityTransport"></p>
+    
+        <button onclick="addToHistory()">Add to History</button>
     </div>
 
     <!-- Lottie Loader -->
     <div id="loader">
-      <dotlottie-player
-        src="https://lottie.host/a9f66eb1-2a88-42be-8f46-167801ea3b34/yMWTFfpByy.lottie"
-        background="transparent"
-        speed="2"
-        style="width: 100px; height: 100px"
-        loop
-        autoplay
-      ></dotlottie-player>
+        <dotlottie-player src="https://lottie.host/a9f66eb1-2a88-42be-8f46-167801ea3b34/yMWTFfpByy.lottie" 
+                          background="transparent" 
+                          speed="1" 
+                          style="width: 80px; height: 80px" 
+                          loop 
+                          autoplay>
+        </dotlottie-player>
     </div>
 
+    <div id="historyContainer"></div>
+
     <script>
-      function searchUser() {
-        const name = document.getElementById("nameInput").value.trim();
-        const responseDiv = document.getElementById("response");
-        const userCard = document.getElementById("userCard");
-        const userImage = document.getElementById("userImage");
-        const userName = document.getElementById("userName");
-        const userAge = document.getElementById("userAge");
-        const loader = document.getElementById("loader");
+        let history = JSON.parse(localStorage.getItem("history")) || [];
+        displayHistory();
 
-        // Hide previous response and card
-        responseDiv.style.display = "none";
-        userCard.style.display = "none";
-        loader.style.display = "block"; // Show loader
+        function searchUser() {
+            const name = document.getElementById("nameInput").value.trim();
+            const responseDiv = document.getElementById("response");
+            const userCard = document.getElementById("userCard");
+            const loader = document.getElementById("loader");
 
-        if (!name) {
-          alert("Please provide a name.");
-          loader.style.display = "none"; // Hide loader if no name is provided
-          return;
+            responseDiv.textContent = "";
+            userCard.style.display = "none";
+            loader.style.display = "block";
+
+            if (!name) {
+                alert("Please enter a name.");
+                loader.style.display = "none";
+                return;
+            }
+
+            fetch(`http://localhost:4000/api/udata?apikey=abcdef&name=${name}`)
+                .then(response => response.json())
+                .then(data => {
+                    loader.style.display = "none";
+                    if (data.data) {
+                        userCard.style.display = "block";
+                        document.getElementById("userImage").src = data.data.imageUrl;
+                        document.getElementById("userName").textContent = data.data.name;
+                        document.getElementById("userAge").textContent = data.data.info;
+                        document.getElementById("cityTransport").textContent = `🚍 Transport: ${data.data.transport}`;
+                    } else {
+                        responseDiv.textContent = data.message;
+                    }
+                })
+                .catch(error => {
+                    loader.style.display = "none";
+                    responseDiv.textContent = `Error: ${error}`;
+                });
         }
 
-        // Keep loader visible for at least 2 seconds
-        const loaderTimeout = setTimeout(() => {
+        function addToHistory() {
+            const name = document.getElementById("userName").textContent;
+            const image = document.getElementById("userImage").src;
+            const description = document.getElementById("userAge").textContent;
 
-          fetch(
-          `https://try-api-1.onrender.com/api/udata?api_key=abcdef&name=${name}`
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            clearTimeout(loaderTimeout); // Clear the loader timeout if data is fetched before 2 seconds
-            loader.style.display = "none"; // Hide loader once data is fetched
-            if (data.data) {
-              // Display the user card
-              userCard.style.display = "block";
-              userImage.src = data.data.imageUrl;
-              userName.textContent = data.data.name;
-              userAge.textContent = `${data.data.info}`;
-            } else {
-              responseDiv.style.display = "block";
-              responseDiv.textContent = data.message;
-            }
-          })
-          .catch((error) => {
-            clearTimeout(loaderTimeout); // Clear the loader timeout if an error occurs before 2 seconds
-            loader.style.display = "none"; // Hide loader on error
-            responseDiv.style.display = "block";
-            responseDiv.textContent = `Error: ${error}`;
-          });
+            history.push({ name, image, description });
+            localStorage.setItem("history", JSON.stringify(history));
+            displayHistory();
+        }
 
-          loader.style.display = "none";
-        }, 6000); // Minimum 2 seconds
+        function displayHistory() {
+    document.getElementById("historyContainer").innerHTML = history.map((item, index) => `
+        <div class="history-card">
+            <img src="${item.image}" alt="${item.name}">
+            <h3>${item.name}</h3>
+            <button onclick="removeFromHistory(${index})">Remove</button>
+        </div>
+    `).join("");
+}
 
-       
-      }
+function removeFromHistory(index) {
+    history.splice(index, 1);
+    localStorage.setItem("history", JSON.stringify(history));
+    displayHistory();
+}
     </script>
-  </body>
+</body>
 </html>
